@@ -2,6 +2,7 @@ package guru.spingframework.spring_6_webapp.domain;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -14,8 +15,8 @@ public class Book {
 
     @ManyToMany
     @JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "book_id"),
-    inverseJoinColumns = @JoinColumn(name = "book_id"))
-    private Set<Author> authors;
+            inverseJoinColumns = @JoinColumn(name = "author_id"))
+    private Set<Author> authors = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -35,6 +36,10 @@ public class Book {
 
     public String getIsbn() {
         return isbn;
+    }
+
+    public Set<Author> getAuthors() {
+        return authors;
     }
 
     public void setIsbn(String isbn) {
